@@ -1,0 +1,33 @@
+<div class="checkout-wrapper">
+<div class="content-wrapper">
+  <form class="form-wrapper" [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+    <section class="delivery-date-section section section--visible">
+    <div>
+      <div class="checkout-input-wrapper checkout-input-wrapper--mobile-number" [ngClass]="{'checkout-input-wrapper--invalid' : mobileNumber.errors?.pattern}">
+        <input aria-labelledby="mobile-number-placeholder" 
+              class="checkout-input" 
+              name="mobileNumber" 
+              type="tel"  
+              formControlName="mobileNumber"
+              [formControl]="mobileNumber" 
+              pattern="((\+44(\s\(0\)\s|\s0\s|\s)?)|0)7\d{3}(\s)?\d{6}"
+              (keypress)="somethingChanged($event.target.value)">
+          <p class="checkout-placeholder mobile-number-placeholder" id="mobile-number-placeholder">Your mobile number</p>
+          <img alt="Valid input icon" 
+              *ngIf="(mobileNumber.value != null && !mobileNumber.errors?.pattern)"
+              class="checkout__checkmark" 
+              src="assets/images/green-checkmark.svg">
+        </div>
+        <p *ngIf="mobileNumber.errors?.pattern" class="checkout-input__validation-error">
+          Please enter a valid UK mobile number.
+        </p> 
+    </div>
+    <p class="courier-info">Your courier will text you on the day with a delivery time slot. This is optional.</p>
+    </section>
+  <button class="checkout__continue-button btn btn-updated btn-updated--blue" 
+          type="submit" 
+          style="animation: 0s ease 0s 1 normal none running none;">Submit Phone Number
+  </button>
+</form>
+</div>
+</div>
